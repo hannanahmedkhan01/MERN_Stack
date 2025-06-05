@@ -4,8 +4,8 @@
   "description": "GoalSetter App for tutorial",
   "main": "server.js",
   "scripts": {
-   "start": "node server.js",
-     "server": "nodemon server.js"
+    "start": "node server.js",
+    "server": "nodemon server.js"
   },
   "author": "Hannan Khan",
   "license": "MIT",
