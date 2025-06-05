@@ -1,0 +1,21 @@
+{
+  "name": "mern-stack",
+  "version": "1.0.0",
+  "description": "GoalSetter App for tutorial",
+  "main": "server.js",
+  "scripts": {
+   "start": "node server.js",
+     "server": "nodemon server.js"
+  },
+  "author": "Hannan Khan",
+  "license": "MIT",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "mongoose": "^8.15.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
