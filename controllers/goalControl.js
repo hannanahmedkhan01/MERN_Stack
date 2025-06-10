@@ -9,9 +9,10 @@ const Goal = require("../models/goalModels");
 
 const getGoals = asynchandler(async (req, res) => {
   const goal = await Goal.find();
-
+ 
   res.status(200).json(goal);
 });
+
 //@desc POST Goals
 //@route POST /api/goals
 //@access private
@@ -44,7 +45,7 @@ const updateGoals = asynchandler(async (req, res) => {
   res.status(200).json(updateGoal);
 });
 //@desc DElETE Goals
-//@route DELETE /api/goals
+//@route DELETE /api/goals/:id
 //@access private
 
 const deleteGoals = asynchandler(async (req, res) => {
