@@ -12,9 +12,9 @@ connectDB()
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 
-app.use(errorhandler)
 app.use('/api/goals',require('./routes/goalRoutes'))
 app.use('/api/users',require('./routes/userRoutes'))
+app.use(errorhandler)
 
 app.listen(port, () => console.log(`Server Connected to ${port}!`))
 
