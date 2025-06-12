@@ -33,19 +33,17 @@ const getGoals = asynchandler(async (req, res) => {
 
 const setGoals = asynchandler(async (req, res) => {
   if (!req.body.text) {
-    res.status(404);
+    res.status(400);
     throw new Error("Please enter text...");
   }
 
   const goal = await Goal.create({
     text: req.body.text,
-    user: req.body.id,
+    user: req.user.id,
   });
 
-  res.status(200).json(goal);
+  res.status(201).json(goal);
 });
-
-
 
 
 
@@ -99,10 +97,9 @@ const deleteGoals = asynchandler(async (req, res) => {
     throw new Error("Goal NOT FOUND");
   }
 
-  await goal.remove();
-  //const deletedGoals = await Goal.findByIdAndDelete(req.params.id);
+const deletedGoals = await Goal.findByIdAndDelete(req.params.id);
 
-  res.status(200).json({ id: req.param.id });
+  res.status(200).json({ id: req.params.id });
 });
 
 module.exports = {

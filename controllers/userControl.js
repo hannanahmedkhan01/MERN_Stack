@@ -12,18 +12,18 @@ const User = require("../models/userModels");
 //@route POST /api/goals
 //@access public
 
-const registerUser = asynchandler(async (res, req) => {
+const registerUser = asynchandler(async (req, res) => {
   const { name, email, password } = req.body;
   if (!name || !email || !password) {
     res.status(400);
-    throw new Error("Please fill all feilds");
+    throw new Error('Please fill all feilds');
   }
 
   //CHECK ID USER EXISTS
   const userExist = await User.findOne({ email });
   if (userExist) {
     res.status(400);
-    throw new Error("User already Exists!");
+    throw new Error('User already Exists!');
   }
   //Hash Password
   const salt = await bcrypt.genSalt(10);
@@ -46,7 +46,7 @@ const registerUser = asynchandler(async (res, req) => {
     });
   } else {
     res.status(400);
-    throw new Error("Invalid User");
+    throw new Error('Invalid User');
   }
 });
 
@@ -63,7 +63,7 @@ const registerUser = asynchandler(async (res, req) => {
 //@route POST /api/goals/login
 //@access public
 
-const loginUser = asynchandler(async (res, req) => {
+const loginUser = asynchandler(async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
   if (user && (await bcrypt.compare(password, user.password))) {
@@ -89,20 +89,22 @@ const loginUser = asynchandler(async (res, req) => {
 //@route GET /api/goals/me
 //@access public
 
-const getMe = asynchandler(async (res, req) => {
+const getMe = asynchandler(async (req, res) => {
   const { _id, name, email } = await User.findById(req.user.id);
   res.status(200).json({
-    id: _id,
-    name: name,
-    email:email,
+    id:_id,
+    name,
+    email,
   });
 
-  const generateToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "30d" });
-  };
+ 
 });
 
+//JWT generation
 
+const generateToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "30d",});
+};
 
 
 
@@ -111,4 +113,5 @@ module.exports = {
   registerUser,
   loginUser,
   getMe,
+  generateToken,
 };
